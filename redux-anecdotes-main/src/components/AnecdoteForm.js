@@ -1,12 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { createAnecdote } from "../reducers/anecdoteReducer";
 
-export default function AnecdoteForm() {
-  const dispatch = useDispatch();
-
-  const create = (content) => {
-    dispatch(createAnecdote(content));
+let AnecdoteForm = ({ create }) => {
+  const onSubmit = (content) => {
+    create(content);
   };
 
   return (
@@ -15,7 +13,7 @@ export default function AnecdoteForm() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          create(e.target.content.value);
+          onSubmit(e.target.content.value);
           e.target.content.value = "";
         }}
       >
@@ -26,4 +24,7 @@ export default function AnecdoteForm() {
       </form>
     </>
   );
-}
+};
+
+AnecdoteForm = connect(null, { create: createAnecdote })(AnecdoteForm);
+export default AnecdoteForm;

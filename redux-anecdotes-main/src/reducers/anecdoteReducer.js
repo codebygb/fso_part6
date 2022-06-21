@@ -81,6 +81,7 @@ export const voteAnecdote = (anecdote) => {
     try {
       const newAnecdote = await anecdoteService.addVote(anecdote);
       dispatch(vote(newAnecdote.id));
+      dispatch(removeAllNotifications());
       dispatch(
         sendNotification(`You voted for '${newAnecdote.content}'`, "success")
       );

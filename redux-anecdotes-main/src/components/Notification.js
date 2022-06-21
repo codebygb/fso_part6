@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-const Notification = () => {
-  const notification = useSelector((state) => state.notification);
+let Notification = ({ notification }) => {
+  // const notification = useSelector((state) => state.notification);
 
   const style = {
     border: "solid",
@@ -20,5 +20,11 @@ const Notification = () => {
     </div>
   ));
 };
+
+Notification = connect((state) => {
+  return {
+    notification: state.notification,
+  };
+}, null)(Notification);
 
 export default Notification;
